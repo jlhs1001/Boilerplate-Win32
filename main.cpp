@@ -25,50 +25,6 @@
 ** https://docs.microsoft.com/en-us/windows/win32/
 */
 
-// Draws rectangle. Be sure to specify hwnd!
-void DrawRect(HWND hWnd, int x, int y, int w, int h)
-{
-	// Set up the device context for drawing.
-	PAINTSTRUCT ps;
-	HDC hDC = BeginPaint(hWnd, &ps);
-	HPEN hpenOld = static_cast<HPEN>(SelectObject(hDC, GetStockObject(DC_PEN)));
-	HBRUSH hbrushOld = static_cast<HBRUSH>(SelectObject(hDC, GetStockObject(NULL_BRUSH)));
-
-	RECT rcWindow;
-	GetClientRect(hWnd, &rcWindow);
-
-	RECT rect = rcWindow;
-
-	// set rectangle dimentions
-	rect = { x, y, w, h };
-
-	// Draw (differently-colored) borders around these rectangles.
-	SetDCPenColor(hDC, RGB(255, 0, 0));    // red
-	Rectangle(hDC, rect.left, rect.top, rect.right, rect.bottom);
-}
-
-template <typename T>
-class Unit
-{
-public:
-	Unit(std::map<std::string, T>)
-	{
-
-	}
-};
-
-
-void GetMouseInput(LPARAM lparam)
-{
-
-}
-
-void JengineMain(HWND hWnd)
-{
-	// Draw a rectangle to the window-- x, y, w, h
-	DrawRect(hWnd, 60, 60, 20, 20);
-}
-
 
 // WindowProc function prototype
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -124,9 +80,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	** Enter the main loop:
 	**
 	*/
-
-	JengineMain(hWnd);
-
 
 	// This struct holds Windows event messages
 	MSG msg = { 0 };
